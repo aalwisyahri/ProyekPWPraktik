@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}Manajemen Pengguna{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="font-sans bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white text-gray-800 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Manajemen Pengguna PW Praktik</h1>
+            <div class="flex space-x-4">
+                {% if session.get('user_id') %}
+                    <!-- Jika sudah login, tampilkan tombol logout -->
+                    <a href="{{ url_for('main.logout') }}" class="text-sm bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition">Logout</a>
+                {% else %}
+                    <!-- Jika belum login, tampilkan tombol login dan register -->
+                    <a href="{{ url_for('main.login') }}" class="text-sm bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">Login</a>
+                    <a href="{{ url_for('main.register') }}" class="text-sm bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section id="hero" class="hero section bg-blue-500 text-white py-16">
+    <div class="container mx-auto px-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 text-center lg:text-left">
+                <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-4xl font-bold mb-4">Selamat Datang di Manajemen Pengguna</h2>
+                    <p class="text-lg mb-6">Kelola pengguna dengan mudah dan cepat. Daftar atau login untuk melanjutkan.</p>
+                    <div class="hero-buttons">
+                        {% if session.get('user_id') %}
+                            <!-- Jika sudah login, arahkan ke dashboard -->
+                            <a href="{{ url_for('main.dashboard') }}" class="bg-white text-black font-semibold py-3 px-6 rounded-full hover:bg-gray-400 transition">Kelola Disini</a>
+                        {% else %}
+                            <!-- Jika belum login, arahkan ke halaman register -->
+                            <a href="{{ url_for('main.login') }}" class="bg-white text-black font-semibold py-3 px-6 rounded-full hover:bg-gray-400 transition">Daftar Sekarang</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 mt-8 lg:mt-0">
+                <!-- Menambahkan Gambar -->
+                <img src="{{ url_for('static', filename='img/hero-image.svg') }}" alt="Hero Image" class="w-full rounded-lg">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3">
+        <div class="text-center mt-2 text-gray-700">
+            <h6>Copyright &copy; Alwi (Project PW Praktik 2025)</h6>
+        </div>
+    </footer>
+    
+</body>
+</html>
